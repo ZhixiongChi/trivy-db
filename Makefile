@@ -12,6 +12,10 @@ ifndef REPO_OWNER
     REPO_OWNER=aquasecurity
 endif
 
+ifndef ELXR_REPO_OWNER
+    ELXR_REPO_OWNER=elxr
+endif
+
 u := $(if $(update),-u)
 
 $(GOBIN)/wire:
@@ -103,6 +107,8 @@ db-fetch-vuln-list:
 	wget -qO - https://github.com/$(REPO_OWNER)/vuln-list-redhat/archive/main.tar.gz | tar xz -C $(CACHE_DIR)/vuln-list-redhat --strip-components=1
 	mkdir -p $(CACHE_DIR)/vuln-list-debian
 	wget -qO - https://github.com/$(REPO_OWNER)/vuln-list-debian/archive/main.tar.gz | tar xz -C $(CACHE_DIR)/vuln-list-debian --strip-components=1
+	mkdir -p $(CACHE_DIR)/vuln-list-elxr
+	wget -qO - https://github.com/$(ELXR_REPO_OWNER)/vuln-list-elxr/archive/main.tar.gz | tar xz -C $(CACHE_DIR)/vuln-list-elxr --strip-components=1
 	mkdir -p $(CACHE_DIR)/vuln-list-nvd
 	wget -qO - https://github.com/$(REPO_OWNER)/vuln-list-nvd/archive/main.tar.gz | tar xz -C $(CACHE_DIR)/vuln-list-nvd --strip-components=1
 	mkdir -p $(CACHE_DIR)/vuln-list-aqua
