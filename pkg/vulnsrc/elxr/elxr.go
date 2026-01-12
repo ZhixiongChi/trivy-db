@@ -32,6 +32,7 @@ const (
 	sourcesDir        = "source"
 	updateSourcesDir  = "updates-source"
 	elxrSourcesDir    = "elxr-source"
+	elxrSecSourceDir  = "elxr-securitysource"
 	cveDir            = "CVE"
 	dlaDir            = "DLA"
 	dsaDir            = "DSA"
@@ -151,6 +152,11 @@ func (vs VulnSrc) parse(dir string) error {
 	// Parse elxr-source/**.json
 	if err := vs.parseSources(filepath.Join(rootDir, elxrSourcesDir)); err != nil {
 		return eb.Wrapf(err, "elxr-source parse error")
+	}
+
+	// Parse elxr-securitysource/**.json
+	if err := vs.parseSources(filepath.Join(rootDir, elxrSecSourceDir)); err != nil {
+		return eb.Wrapf(err, "elxr-securitysource parse error")
 	}
 
 	// Parse CVE/*.json
@@ -599,7 +605,7 @@ func (vs VulnSrc) parseDistributions(rootDir string) error {
 		vs.distributions[dist] = val.MajorVersion
 	}
 	vs.distributions["aria"] = "12"
-	vs.distributions["bianca"] = "13"
+	vs.distributions["bianca"] = "26.03"
 
 	return nil
 }
