@@ -1,8 +1,6 @@
 ---
 name: Trivy DB
 on:
-  schedule:
-    - cron: "0 */6 * * *"
   workflow_dispatch:
 env:
   REPO_OWNER: aquasecurity # used in 'make db-build' with the original repo_owner
